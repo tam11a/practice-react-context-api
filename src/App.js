@@ -1,22 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import DatePicker from "sassy-datepicker";
+import dateContext from "./DateProvider";
+import Header from "./Header";
 
 function App() {
+  const { date, addDate, subDate, setDate, onChange } =
+    React.useContext(dateContext);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Header />
+        <div style={{ margin: "20px" }}>
+          <button onClick={() => addDate()}>+</button>
+          <button style={{ marginRight: "10px", marginLeft: "10px" }}>
+            {date.toDateString()}
+          </button>
+          <button onClick={() => subDate()}>-</button>
+        </div>
+        <DatePicker onChange={onChange} selected={date} />
       </header>
     </div>
   );
